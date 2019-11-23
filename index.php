@@ -22,6 +22,16 @@
         </form>';
     }
 
+    if(!empty($_SESSION['email'])) {
+        echo '<a href="./publishes/form.php">Stwórz publikacje</a>';
+    }
+       if(!empty($_SESSION['typ']) && $_SESSION['typ'] == 'admin') {
+        echo "<h3>Użytkownicy: </h3>";
+        require_once('./user/select.php');
+        }
+        echo "<h3>Publikacje: </h3>";
+    require_once('./publishes/select.php');
+    
     if(empty($_SESSION['email'])) {
         if(isset($_SESSION['register'])) {
         echo "Dziekujemy za rejestracje. Możesz teraz sie zalogowac";
