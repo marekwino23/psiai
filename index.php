@@ -12,7 +12,13 @@
 <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <?php require_once('./layout/header.php'); ?>
+    <?php require_once('./layout/header.php'); 
+    $search = !empty($_POST['searchVal']) ? $_POST['searchVal'] : '';
+    ?>
+    <form action="index.php" method="POST">
+        <input type="text" name="searchVal" placeholder="Znajdź artykuł" value="<?php echo $search ?>" />
+        <input type="submit" name="search" value="Search.."/>
+    </form>
     <?php 
 
     if(!empty($_SESSION['email'])) {
@@ -21,6 +27,10 @@
         <button name="logout">logout</button>
         </form>';
     }
+
+    if(!empty($_SESSION['typ']) && $_SESSION['typ'] == 'admin') {
+        echo '<a href="tools.php">Odebrane wiadomości </a>';
+        }
 
     if(!empty($_SESSION['email'])) {
         echo '<a href="./publishes/form.php">Stwórz publikacje</a>';
@@ -44,5 +54,6 @@
         </div>';
     }
     require_once('./layout/footer.php') ?>
+    <a href="kontakt.php"> <p> Kontakt z administratorem </p> </a>
 </body>
 </html>
