@@ -18,10 +18,14 @@ if(!empty($order) && !empty($sort)) {
         $pub = $db->query($query);
         $publishes =  $pub->fetchAll();
             if($publishes) {
+            $actions = '';
+            if(!empty($_SESSION['typ'])) {
+                $actions = '<th colspan="2"> actions </th>';
+            }
             echo "<table>";
             echo "<thead>";
-            echo '<tr><th>year</th><th>title</th><th>createdWith</th>
-            <th>participation</th><th>doi</th><th>date</th><th>numofPoints<th>conference</th></tr>';
+            echo '<tr><th><a href="?order=year&sort='.$sort.'">year</a></th><th><a href="?order=title&sort='.$sort.'">title</a></th><th><a href="?order=createdWith&sort='.$sort.'">createdWith</a></th>
+            <th><a href="?order=participation&sort='.$sort.'">participation</a></th><th><a href="?order=doi&sort='.$sort.'">doi</a></th><th><a href="?order=date&sort='.$sort.'">date</a></th><th><a href="?order=numOfPoints&sort='.$sort.'">numofPoints</a><th><a href="?order=conference&sort='.$sort.'">conference</a></th>'.$actions.'</tr>';
             echo "</thread>";
             echo "<tbody>";
             foreach($publishes as $row) {
@@ -34,6 +38,22 @@ if(!empty($order) && !empty($sort)) {
                     echo "<td>'".$row['date']."'</td>";
                     echo "<td>'".$row['numOfPoints']."'</td>";
                     echo "<td>'".$row['conference']."'</td>";
+                    if(!empty($_SESSION['typ'])) {
+                        echo '<td>
+                        <form action="./publishes/form.php" method="POST">
+                        <input type="hidden" name="id" value="'.$row['id'].'">
+                        <button type="submit">edit</button>
+                        </form>
+                        </td>';
+                    if($_SESSION['typ'] == 'admin'){
+                        echo '<td>
+                        <form action="./publishes/delete.php" method="POST">
+                        <input type="hidden" name="id" value="'.$row['id'].'">
+                        <button type="submit">delete</button>
+                        </form>
+                        </td>';
+                        }
+                    }
                 echo "</tr>";
             }
             echo "</tbody>";

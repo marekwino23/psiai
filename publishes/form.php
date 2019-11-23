@@ -36,7 +36,11 @@ if($_POST && isset($_POST['wyslij'])) {
     }
     if(!empty($_POST['year']) && !empty($_POST['title']) && !empty($_POST['createdWith'])&& !empty($_POST['participation']) && !empty($_POST['doi']) && !empty($_POST['date']) && !empty($_POST['numOfPoints'])&& !empty($_POST['conference'])) {
         try {
-            require_once('insert.php');
+            if($_POST['id']) {
+                require_once('update.php');
+            } else {
+                require_once('insert.php');
+            }
             $res = $publishes->execute();
             
         if ($res ) {
@@ -48,6 +52,20 @@ if($_POST && isset($_POST['wyslij'])) {
         }
     }
 }
+else {
+    require_once('edit.php');
+    $res = $publishes->execute();
+    foreach($publishes as $row) {
+        $year = $row['year'];
+        $title = $row['title'];
+        $createdWith = $row['createdWith'];
+        $participation = $row['participation'];
+        $doi = $row['doi'];
+        $date = $row['date'];
+        $numOfPoints = $row['numOfPoints'];
+        $conference = $row['conference'];
+    }
+}
 ?>
 <html>
 <head>
@@ -57,9 +75,10 @@ if($_POST && isset($_POST['wyslij'])) {
 </head>
 <body>
     <?php require_once('./../layout/header.php') ?>
-    <p>Dodawanie publkacji</p>
+    <p><?php echo $_POST['id'] ? 'Edytowanie publikacji' : 'Dodawanie publkacji'?></p>
     <form method="POST">
-    <a href="./../index.php"> <p> Back </p> </a>
+    <a href="./../index.php"><p>Back</p></a>
+    <input type="hidden" name="id" value="<?php echo $_POST['id'] ?>">
     <div class="form-field">
         <label class="form-label">year </label>
         <input type="text" name="year" value="<?php echo $year ?>">
@@ -100,7 +119,7 @@ if($_POST && isset($_POST['wyslij'])) {
         <input type="text" name="conference" value="<?php echo $conference ?>">
         <span class="error"><?php echo $ERROR['conference'] ?></span>
     </div>
-    <button name="wyslij" value="wyslij"> Save </button> 
+    <button name="wyslij" value="wyslij">Save</button> 
     </form>
     </body>
     </html>
