@@ -24,12 +24,13 @@ if(!empty($order) && !empty($sort)) {
             }
             echo "<table>";
             echo "<thead>";
-            echo '<tr><th><a href="?order=year&sort='.$sort.'">year</a></th><th><a href="?order=title&sort='.$sort.'">title</a></th><th><a href="?order=createdWith&sort='.$sort.'">createdWith</a></th>
-            <th><a href="?order=participation&sort='.$sort.'">participation</a></th><th><a href="?order=doi&sort='.$sort.'">doi</a></th><th><a href="?order=date&sort='.$sort.'">date</a></th><th><a href="?order=numOfPoints&sort='.$sort.'">numofPoints</a><th><a href="?order=conference&sort='.$sort.'">conference</a></th>'.$actions.'</tr>';
+            echo '<tr><th>export</th><th><a href="?order=year&sort='.$sort.'">year</a><input type="checkbox" /></th><th><a href="?order=title&sort='.$sort.'">title</a><input type="checkbox" /></th><th><a href="?order=createdWith&sort='.$sort.'">createdWith</a><input type="checkbox" /></th>
+            <th><a href="?order=participation&sort='.$sort.'">participation</a><input type="checkbox" /></th><th><a href="?order=doi&sort='.$sort.'">doi</a><input type="checkbox" /></th><th><a href="?order=date&sort='.$sort.'">date</a><input type="checkbox" /></th><th><a href="?order=numOfPoints&sort='.$sort.'">numofPoints</a><input type="checkbox" /><th><a href="?order=conference&sort='.$sort.'">conference</a><input type="checkbox" /></th>'.$actions.'</tr>';
             echo "</thread>";
             echo "<tbody>";
             foreach($publishes as $row) {
                 echo "<tr>";
+                    echo '<td><input type="checkbox"</input></td>';
                     echo "<td>'".$row['year']."'</td>";
                     echo "<td>'".$row['title']."'</td>";
                     echo "<td>'".$row['createdWith']."'</td>";
