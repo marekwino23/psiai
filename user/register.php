@@ -29,7 +29,7 @@ if($_POST && $_POST['register']) {
             $user = $db->prepare("INSERT INTO user (`id`, `login`, `password`, `uniwersity`) VALUES (:id, :login, :password, :university)" );
             $user->bindParam(':id', $id);
             $user->bindParam(':login', $_POST['email']);
-            $user->bindParam(':password', hash('sha512', $_POST['password']);['password']);
+            $user->bindParam(':password', md5($_POST['password']));
             $user->bindParam(':university', $_POST['uczelnia']);
         if ( $user->execute()) {
             $_SESSION['register'] = true;

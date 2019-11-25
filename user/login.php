@@ -12,7 +12,8 @@ if(isset($_POST['login'])) {
         try {
             $user = $db->prepare('SELECT `Typ` FROM user WHERE login = :email AND password = :password');
             $user->bindParam(':email', $_POST['email']);
-            $user->bindParam(':password', $_POST['password']);
+            $user->bindParam(':password', md5($_POST['password']));
+            var_dump(hash('sha512', $_POST['password']));
             $user->execute();
             $result = $user->fetchColumn();
             if ($result) {
