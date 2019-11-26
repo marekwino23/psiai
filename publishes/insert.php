@@ -5,9 +5,9 @@ foreach ($db->query('SELECT MAX(id) FROM publishes') as $row) {
     $id = $row["MAX(id)"] + 1;
 }
 $publishes = $db->prepare("INSERT INTO publishes 
-(`id`, `year`, `title`, `createdWith`, `participation`, `doi`, `date`, `numOfPoints`, `conference`) 
+(`id`, `year`, `title`, `createdWith`, `participation`, `doi`, `date`, `numOfPoints`, `conference`, `user_id`) 
 VALUES 
-(:id, :year, :title, :createdWith, :participation, :doi, :date, :numOfPoints, :conference )" );
+(:id, :year, :title, :createdWith, :participation, :doi, :date, :numOfPoints, :conference, :user_id )" );
 $publishes->bindParam(':id', $id);
 $publishes->bindParam(':year', $_POST['year']);
 $publishes->bindParam(':title', $_POST['title']);
@@ -17,4 +17,5 @@ $publishes->bindParam(':doi', $_POST['doi']);
 $publishes->bindParam(':date', $_POST['date']);
 $publishes->bindParam(':numOfPoints', $_POST['numOfPoints']);
 $publishes->bindParam(':conference', $_POST['conference']);
+$publishes->bindParam(':user_id', $_SESSION['id']);
 ?>

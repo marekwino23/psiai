@@ -22,41 +22,13 @@ if(!empty($order) && !empty($sort)) {
             if(!empty($_SESSION['typ'])) {
                 $actions = '<th colspan="2"> actions </th>';
             }
-            echo "<table>";
+			echo "<table>";
             echo "<thead>";
-            echo '<tr><th>export</th><th><a href="?order=year&sort='.$sort.'">year</a><input type="checkbox" /></th><th><a href="?order=title&sort='.$sort.'">title</a><input type="checkbox" /></th><th><a href="?order=createdWith&sort='.$sort.'">createdWith</a><input type="checkbox" /></th>
-            <th><a href="?order=participation&sort='.$sort.'">participation</a><input type="checkbox" /></th><th><a href="?order=doi&sort='.$sort.'">doi</a><input type="checkbox" /></th><th><a href="?order=date&sort='.$sort.'">date</a><input type="checkbox" /></th><th><a href="?order=numOfPoints&sort='.$sort.'">numofPoints</a><input type="checkbox" /><th><a href="?order=conference&sort='.$sort.'">conference</a><input type="checkbox" /></th>'.$actions.'</tr>';
-            echo "</thread>";
+            echo '<tr><th>export</th><th><a href="?order=year&sort='.$sort.'">year</a><input type="checkbox" name="year" /></th><th><a href="?order=title&sort='.$sort.'">title</a><input type="checkbox" name="title" /></th><th><a href="?order=createdWith&sort='.$sort.'">createdWith</a><input type="checkbox" name="createdWith" /></th>
+            <th><a href="?order=participation&sort='.$sort.'">participation</a><input type="checkbox" name="participation" /></th><th><a href="?order=doi&sort='.$sort.'">doi</a><input type="checkbox" name="doi" /></th><th><a href="?order=date&sort='.$sort.'">date</a><input type="checkbox" name="date"</th><th><a href="?order=numOfPoints&sort='.$sort.'">numofPoints</a><input type="checkbox" name="numOfPoints" /><th><a href="?order=conference&sort='.$sort.'">conference</a><input type="checkbox" name="conference" /></th>'.$actions.'</tr>';
+            echo "</thead>";
             echo "<tbody>";
-            foreach($publishes as $row) {
-                echo "<tr>";
-                    echo '<td><input type="checkbox"</input></td>';
-                    echo "<td>'".$row['year']."'</td>";
-                    echo "<td>'".$row['title']."'</td>";
-                    echo "<td>'".$row['createdWith']."'</td>";
-                    echo "<td>'".$row['participation']."'</td>";
-                    echo "<td>'".$row['doi']."'</td>";
-                    echo "<td>'".$row['date']."'</td>";
-                    echo "<td>'".$row['numOfPoints']."'</td>";
-                    echo "<td>'".$row['conference']."'</td>";
-                    if(!empty($_SESSION['typ'])) {
-                        echo '<td>
-                        <form action="./publishes/form.php" method="POST">
-                        <input type="hidden" name="id" value="'.$row['id'].'">
-                        <button type="submit">edit</button>
-                        </form>
-                        </td>';
-                    if($_SESSION['typ'] == 'admin'){
-                        echo '<td>
-                        <form action="./publishes/delete.php" method="POST">
-                        <input type="hidden" name="id" value="'.$row['id'].'">
-                        <button type="submit">delete</button>
-                        </form>
-                        </td>';
-                        }
-                    }
-                echo "</tr>";
-            }
+            require_once('tableData.php');
             echo "</tbody>";
             echo "</table>";
             }

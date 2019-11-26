@@ -1,5 +1,5 @@
 <?php require_once('./config/connection.php'); 
-    if(isset($_POST['logout'])) {
+	if(isset($_POST['logout'])) {
         session_destroy();
         header('Location: index.php');
         $db = null;
@@ -37,9 +37,10 @@
     }
        if(!empty($_SESSION['typ']) && $_SESSION['typ'] == 'admin') {
         echo "<h3>Użytkownicy: </h3>";
-        require_once('./user/select.php');
+		require_once('./user/select.php');
         }
         echo "<h3>Publikacje: </h3>";
+		echo '<form action="./publishes/export.php" method="POST">';
     require_once('./publishes/select.php');
     
     if(empty($_SESSION['email'])) {
@@ -53,7 +54,9 @@
             <a class="btn" href="./user/register.php">ZAREJESTRUJ</a>
         </div>';
     }
-    require_once('./layout/footer.php') ?>
+    require_once('./layout/footer.php');
+	echo '</form>';
+	?>
     <a href="kontakt.php"> <p> Kontakt z administratorem </p> </a>
 </body>
 </html>

@@ -10,15 +10,15 @@ if(isset($_POST['login'])) {
     }
     if(!empty($_POST['email']) && !empty($_POST['password'])) {
         try {
-            $user = $db->prepare('SELECT `Typ` FROM user WHERE login = :email AND password = :password');
+            $user = $db->prepare('SELECT `id`, `typ` FROM user WHERE login = :email AND password = :password');
             $user->bindParam(':email', $_POST['email']);
             $user->bindParam(':password', md5($_POST['password']));
-            var_dump(hash('sha512', $_POST['password']));
             $user->execute();
-            $result = $user->fetchColumn();
-            if ($result) {
+            $result = $user->fetchAll();
+            if ($result[0]['typ']) {
+                $_SESSION['id'] = $result[0]['id'];
                 $_SESSION['email'] = $_POST['email'];
-                $_SESSION['typ'] = $result;
+                $_SESSION['typ'] = $result[0]['typ'];
                  header('Location: ./../index.php');
                  die();
             } else {
