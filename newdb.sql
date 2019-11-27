@@ -54,10 +54,10 @@ CREATE TABLE `publishes` (
   `year` year(4) DEFAULT NULL,
   `title` text DEFAULT NULL,
   `createdWith` varchar(50) DEFAULT NULL,
-  `participation` varchar(11) DEFAULT NULL,
-  `doi` varchar(36) DEFAULT NULL,
+  `participation` int(11) DEFAULT NULL,
+  `doi` text DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `numOfPoints` varchar(11) DEFAULT NULL,
+  `numOfPoints` int(11) DEFAULT NULL,
   `conference` text DEFAULT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
