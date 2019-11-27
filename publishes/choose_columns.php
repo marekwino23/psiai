@@ -1,7 +1,7 @@
 <?php
 $columns = '';
 if(!empty($_POST['year'])) {
-$columns = '`year`, ';
+$columns = '`year`,';
 }
 if(!empty($_POST['title'])) {
 $columns = $columns.'`title`,';

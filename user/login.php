@@ -51,8 +51,6 @@ if(isset($_POST['login'])) {
         <span class="error"><?php echo $ERROR['password'] ?></span>
         <div class="down">
             <button type="submit" name="login" value="login">Zaloguj</button>
-            <span> Zapomniałeś hasla ?</span>
-            <a class="link" href="/"> RESETUJ</a>
         </div>
     </form>
 </body>

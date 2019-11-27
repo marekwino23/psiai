@@ -36,5 +36,4 @@
     echo "</tbody>";
     echo "</table>";
     }
-    require_once('./layout/footer.php');
     ?>

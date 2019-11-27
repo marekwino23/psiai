@@ -1,5 +1,6 @@
 <?php 
 foreach($publishes as $row) {
+	
 echo "<tr>";
 	echo '<td><input type="checkbox" name="row_'.$row['id'].'" /></td>';
 	echo "<td>'".$row['year']."'</td>";
@@ -10,19 +11,15 @@ echo "<tr>";
 	echo "<td>'".$row['date']."'</td>";
 	echo "<td>'".$row['numOfPoints']."'</td>";
 	echo "<td>'".$row['conference']."'</td>";
-	if(!empty($_SESSION['typ'] && $_SESSION['id'] == $row['user_id'])) {
-		echo '<td>
-		<form action="./publishes/form.php" method="POST">
-		<input type="hidden" name="id" value="'.$row['id'].'">
-		<button type="submit">edit</button>
-		</form>
+	if(!empty($_SESSION['typ'])) {
+		if($_SESSION['typ'] == 'admin' || $_SESSION['id'] === $row['user_id']) {
+	echo '<td>
+		<a href="./publishes/form.php?id='.$row['id'].'">edit</a>
 		</td>';
+		}
 	if($_SESSION['typ'] == 'admin'){
 		echo '<td>
-		<form action="./publishes/delete.php" method="POST">
-		<input type="hidden" name="id" value="'.$row['id'].'">
-		<button type="submit">delete</button>
-		</form>
+		<a href="./publishes/delete.php?id='.$row['id'].'">delete</a>
 		</td>';
 		}
 	}

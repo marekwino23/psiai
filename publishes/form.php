@@ -36,7 +36,7 @@ if($_POST && isset($_POST['wyslij'])) {
     }
     if(!empty($_POST['year']) && !empty($_POST['title']) && !empty($_POST['createdWith'])&& !empty($_POST['participation']) && !empty($_POST['doi']) && !empty($_POST['date']) && !empty($_POST['numOfPoints'])&& !empty($_POST['conference'])) {
         try {
-            if($_POST['id']) {
+            if(!empty($_GET['id'])) {
                 require_once('update.php');
             } else {
                 require_once('insert.php');
@@ -69,16 +69,16 @@ else {
 ?>
 <html>
 <head>
-<title> Login </title>
+<title><?php echo $_GET['id'] ? 'Edytowanie publikacji' : 'Dodawanie publkacji'?></title>
 <meta charset = "UTF-8">
 <link rel="Stylesheet" href="./../css/style_login.css">
 </head>
 <body>
     <?php require_once('./../layout/header.php') ?>
-    <p><?php echo $_POST['id'] ? 'Edytowanie publikacji' : 'Dodawanie publkacji'?></p>
+    <p><?php echo $_GET['id'] ? 'Edytowanie publikacji' : 'Dodawanie publkacji'?></p>
     <form method="POST">
     <a href="./../index.php"><p>Back</p></a>
-    <input type="hidden" name="id" value="<?php echo $_POST['id'] ?>">
+    <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
     <div class="form-field">
         <label class="form-label">year </label>
         <input type="text" name="year" value="<?php echo $year ?>">

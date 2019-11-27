@@ -1,7 +1,6 @@
 <?php
-var_dump($_POST);
 $publishes = $db->prepare("UPDATE publishes SET `year` = :year, `title` = :title, `createdWith` = :createdWith, `participation` = :participation, `doi`=:doi, date=:date, `numOfPoints`=:numOfPoints, `conference`=:conference WHERE id = :id" );
-$publishes->bindParam(':id', $_POST['id']);
+$publishes->bindParam(':id', $_GET['id']);
 $publishes->bindParam(':year', $_POST['year']);
 $publishes->bindParam(':title', $_POST['title']);
 $publishes->bindParam(':createdWith', $_POST['createdWith']);

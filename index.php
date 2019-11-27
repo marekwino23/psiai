@@ -21,7 +21,7 @@
     </form>
     <?php 
 
-    if(!empty($_SESSION['email'])) {
+    if(!empty($_SESSION['typ'])) {
         echo 'Witaj '.$_SESSION['email'].'';
         echo '<form method="POST">
         <button name="logout">logout</button>
@@ -31,8 +31,8 @@
     if(!empty($_SESSION['typ']) && $_SESSION['typ'] == 'admin') {
         echo '<a href="tools.php">Odebrane wiadomości </a>';
         }
-
-    if(!empty($_SESSION['email'])) {
+echo '<br>';
+    if(!empty($_SESSION['typ'])) {
         echo '<a href="./publishes/form.php">Stwórz publikacje</a>';
     }
        if(!empty($_SESSION['typ']) && $_SESSION['typ'] == 'admin') {
@@ -54,9 +54,11 @@
             <a class="btn" href="./user/register.php">ZAREJESTRUJ</a>
         </div>';
     }
-    require_once('./layout/footer.php');
+	       if(!empty($_SESSION['typ']) && $_SESSION['typ'] === 'user') {
+	echo '<a href="kontakt.php"> <p> Kontakt z administratorem </p> </a> ';	
+	}
+	require_once('./layout/footer.php');
 	echo '</form>';
 	?>
-    <a href="kontakt.php"> <p> Kontakt z administratorem </p> </a>
 </body>
 </html>

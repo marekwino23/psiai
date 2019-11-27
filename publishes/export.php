@@ -5,7 +5,6 @@ if(isset($_POST['submit_docs'])){
 include("../config/connection.php");
 require_once('choose_columns.php');
 require_once('choose_rows.php');
-var_dump("SELECT ".$columns." FROM publishes ".$rows);
 $publishes = $db->query("SELECT ".$columns." FROM publishes ".$rows);  	
 header("Content-Type: application/vnd.msword");
 header("Expires: 0");
