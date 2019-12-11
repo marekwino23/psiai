@@ -1,1 +1,0 @@
-<h1>Bibliometr</h1>
